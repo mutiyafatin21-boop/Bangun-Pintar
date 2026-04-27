@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Website Bangun Pintar</title>
+  </head>
+  <body>
+    <!doctype html>
+    <html lang="id">
+      <head>
+        <meta charset="UTF-8" />
+        <title>Bangun Pintar</title>
+
+        <style>
+          body {
+            font-family: Arial;
+            margin: 0;
+            background: #eef6ff;
+          }
+          .container {
+            padding: 20px;
+          }
+          .card {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          }
+          button {
+            padding: 10px;
+            margin: 5px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+          }
+          button:hover {
+            background: #2980b9;
+          }
+          .hidden {
+            display: none;
+          }
+          input {
+            padding: 6px;
+            margin: 5px;
+          }
+          svg {
+            margin: 10px 0;
+          }
+        </style>
+      </head>
+
+      <body>
+        <div class="container">
+          <!-- LOGIN -->
+          <div id="loginPage">
+            <h1>Bangun Pintar</h1>
+            <input id="namaInput" placeholder="Masukkan nama" />
+            <button onclick="login()">Masuk</button>
+          </div>
+
+          <!-- HOME -->
+          <div id="homePage" class="hidden">
+            <h2 id="welcome"></h2>
+
+            <div class="card">
+              <h3>Definisi Bangun Datar</h3>
+              <p>
+                Bangun datar adalah bentuk 2 dimensi yang hanya mempunyai
+                panjang dan lebar,tidak mempunyai volume dan ruang 
+                <br>contohnya seperti persegi, persegi panjang, dan segitiga. 
+                <br>Nah sekarang kita akan membahas luas permuakaan dan keliling pada bangun
+                datar Persegi,Persegi Panjang dan Segitiga</p>
+              </p>
+            </div>
+
+            <button onclick="openMateri('persegi')">Persegi</button>
+            <button onclick="openMateri('pp')">Persegi Panjang</button>
+            <button onclick="openMateri('segitiga')">Segitiga</button>
+          </div>
+
+          <!-- MATERI -->
+          <div id="materiPage" class="hidden"></div>
+        </div>
+
+        <script>
+          let nama = "";
+
+          function login() {
+            nama = document.getElementById("namaInput").value;
+            if (!nama) {
+              alert("Isi nama!");
+              return;
+            }
+
+            document.getElementById("loginPage").style.display = "none";
+            document.getElementById("homePage").classList.remove("hidden");
+
+            document.getElementById("welcome").innerText =
+              "Halo " + nama + ", Selamat Datang di Bangun Pintar";
+          }
+
+          function openMateri(type) {
+            homePage.classList.add("hidden");
+            let m = document.getElementById("materiPage");
+            m.classList.remove("hidden");
+
+            let html = "";
+
+            if (type === "persegi") {
+              html = `
+<h2>Persegi</h2>
+
+<svg width="120" height="120">
+<rect x="10" y="10" width="100" height="100" fill="lightblue" stroke="black"/>
+</svg>
+
+<div class="card">
+<p><b>Pengertian:</b> Bangun datar dua dimensi (poligon segi empat) yang memiliki empat sisi sama panjang dan empat sudut siku-siku (90 derajat). 
+<br>Persegi merupakan bentuk khusus dari persegi panjang dan belah ketupat.</p>
+<p><b>Memiliki sifat:</b> sisi sejajar, diagonal sama panjang, dan diagonal berpotongan tegak lurus.</p>
+<p><b>Rumus Luas:</b> sisi × sisi</p>
+<p><b>Rumus Keliling:</b> 4 × sisi</p>
+<p><b>Contoh:</b> ubin lantai</p>
+</div>
+
+<input id="inp1" placeholder="Sisi">
+<button onclick="hitungPersegi()">Hitung</button>
+<p id="hasil"></p>
+`;
+            }
+
+            if (type === "pp") {
+              html = `
+<h2>Persegi Panjang</h2>
+
+<svg width="160" height="100">
+<rect x="10" y="10" width="140" height="80" fill="lightgreen" stroke="black"/>
+</svg>
+
+<div class="card">
+<p><b>Pengertian:</b>Bangun datar dua dimensi yang dibentuk oleh dua pasang sisi sejajar yang sama panjang, dengan empat sudut siku-siku (90 derajat).</p>
+<p><b>Memiliki sifaat:</b>sisi berhadapan sejajar dan sama panjang, dengan diagonal-diagonal yang sama panjang.</p>
+<p><b>Luas:</b> p × l</p>
+<p><b>Keliling:</b> 2 × (p + l)</p>
+<p><b>Contoh:</b> papan tulis</p>
+</div>
+
+<input id="inp2p" placeholder="Panjang">
+<input id="inp2l" placeholder="Lebar">
+<button onclick="hitungPP()">Hitung</button>
+<p id="hasil"></p>
+`;
+            }
+
+            if (type === "segitiga") {
+              html = `
+<h2>Segitiga</h2>
+
+<svg width="140" height="120">
+<polygon points="70,10 10,110 130,110" fill="pink" stroke="black"/>
+</svg>
+
+<div class="card">
+<p><b>Pengertian:</b>Bangun datar dua dimensi (poligon) yang dibatasi oleh tiga sisi lurus dan memiliki tiga titik sudut.</p>
+<p><b>Memiliki sifat:</b>Memiliki 3 sisi, 3 titik sudut, dan 3 sudut.Jumlah ketiga sudut dalam sebesar 180 derajat</p>
+<p><b>Luas:</b> 1/2 × alas × tinggi</p>
+<p><b>Keliling:</b> jumlah semua sisi</p>
+<p><b>Contoh:</b> irisan pizza</p>
+</div>
+
+<input id="a" placeholder="Alas">
+<input id="t" placeholder="Tinggi">
+<input id="s1" placeholder="Sisi 1">
+<input id="s2" placeholder="Sisi 2">
+<input id="s3" placeholder="Sisi 3">
+
+<button onclick="hitungSegitiga()">Hitung</button>
+<p id="hasil"></p>
+`;
+            }
+
+            html += `
+<button onclick="quiz()">Latihan Soal</button>
+<button onclick="back()">Kembali</button>
+`;
+
+            m.innerHTML = html;
+          }
+
+          /* HITUNG */
+          function hitungPersegi() {
+            let s = Number(document.getElementById("inp1").value);
+            if (!s) {
+              alert("Isi sisi");
+              return;
+            }
+            document.getElementById("hasil").innerText =
+              "Luas=" + s * s + " | Keliling=" + 4 * s;
+          }
+
+          function hitungPP() {
+            let p = Number(document.getElementById("inp2p").value);
+            let l = Number(document.getElementById("inp2l").value);
+            if (!p || !l) {
+              alert("Isi lengkap");
+              return;
+            }
+            document.getElementById("hasil").innerText =
+              "Luas=" + p * l + " | Keliling=" + 2 * (p + l);
+          }
+
+          function hitungSegitiga() {
+            let a = Number(document.getElementById("a").value);
+            let t = Number(document.getElementById("t").value);
+            let s1 = Number(document.getElementById("s1").value);
+            let s2 = Number(document.getElementById("s2").value);
+            let s3 = Number(document.getElementById("s3").value);
+            if (!a || !t || !s1 || !s2 || !s3) {
+              alert("Isi semua");
+              return;
+            }
+            document.getElementById("hasil").innerText =
+              "Luas=" + 0.5 * a * t + " | Keliling=" + (s1 + s2 + s3);
+          }
+
+          /* QUIZ */
+          function quiz() {
+            materiPage.innerHTML = `
+<h2>Quiz</h2>
+
+<form id="q">
+
+<p>1. Berapakah Luas persegi dengan panjang sisi 4cm?</p>
+<input type="radio" name="q1" value="16">16
+<input type="radio" name="q1" value="8">8
+
+<p>2. Hitunglah Keliling persegi panjang dengan panjang sisi 5cm dan lebar 3cm?</p>
+<input type="radio" name="q2" value="16">16
+<input type="radio" name="q2" value="10">10
+
+<p>3. jika alas segitiga 6cm dan 4cm,berapakah luas nya?</p>
+<input type="radio" name="q3" value="12">12
+<input type="radio" name="q3" value="24">24
+
+<p>4. Berapakah Keliling persegi dengan panjang sisi 3cm?</p>
+<input type="radio" name="q4" value="12">12
+<input type="radio" name="q4" value="9">9
+
+<p>5. Rumus segitiga?</p>
+<input type="radio" name="q5" value="true">1/2 × a × t
+<input type="radio" name="q5" value="false">a × t
+
+</form>
+
+<button onclick="cek()">Kirim</button>
+<p id="out"></p>
+`;
+          }
+
+          /* CEK + PEMBAHASAN */
+          function cek() {
+            let f = document.getElementById("q");
+            let s = 0;
+            let hasil = "";
+
+            if (f.q1.value == "16") {
+              s++;
+              hasil += "1 ✔ 4×4=16<br>";
+            } else hasil += "1 ✘ salah (seharusnya 4×4=16)<br>";
+
+            if (f.q2.value == "16") {
+              s++;
+              hasil += "2 ✔ 2(5+3)=16<br>";
+            } else hasil += "2 ✘ salah (seharusnya 2(5+3)=16)<br>";
+
+            if (f.q3.value == "12") {
+              s++;
+              hasil += "3 ✔ 1/2×6×4=12<br>";
+            } else hasil += "3 ✘ salah (seharusnya 1/2×6×4=12)<br>";
+
+            if (f.q4.value == "12") {
+              s++;
+              hasil += "4 ✔ 4×3=12<br>";
+            } else hasil += "4 ✘ salah (seharusnya 4×3=12)<br>";
+
+            if (f.q5.value == "true") {
+              s++;
+              hasil += "5 ✔ benar<br>";
+            } else hasil += "5 ✘ salah (seharusnya 1/2 × a × t)<br>";
+
+            let skor = s * 20;
+
+            hasil += "<br><b>Skor: " + skor + "%</b><br><br>";
+
+            if (skor >= 70) {
+              hasil +=
+                "🎉 Selamat kamu telah menyelesaikan materi ini dengan baik";
+            } else {
+              hasil += "💪 Belajar lagi ya, kamu pasti bisa!";
+            }
+
+            out.innerHTML = hasil;
+          }
+
+          function back() {
+            materiPage.classList.add("hidden");
+            homePage.classList.remove("hidden");
+          }
+        </script>
+      </body>
+    </html>
+  </body>
+</html>
